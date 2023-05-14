@@ -12,4 +12,9 @@ public class MainController {
         return "What's your MBTI?";
     }
 
+    @GetMapping("/")
+    public String root() {
+        return "redirect: /article/list";
+    }
+
 }
