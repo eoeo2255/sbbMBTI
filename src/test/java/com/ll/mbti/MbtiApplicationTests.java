@@ -1,5 +1,9 @@
 package com.ll.mbti;
 
+import com.ll.mbti.article.Article;
+import com.ll.mbti.article.ArticleRepository;
+import com.ll.mbti.comment.Comment;
+import com.ll.mbti.comment.CommentRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

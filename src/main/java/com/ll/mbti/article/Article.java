@@ -1,5 +1,6 @@
-package com.ll.mbti;
+package com.ll.mbti.article;
 
+import com.ll.mbti.comment.Comment;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.ll.mbti;
+package com.ll.mbti.article;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
