@@ -14,7 +14,8 @@ public class MainController {
 
     @GetMapping("/")
     public String root() {
-        return "redirect: /article/list";
+        return "redirect:/article/list";       //  완전히 새로운 URL로 요청
+        //  forward:<URL> 의 경우 기존 요청 값들이 유지된 상태로 URL 전환
     }
 
 }

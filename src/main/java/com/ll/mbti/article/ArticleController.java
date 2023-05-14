@@ -10,11 +10,11 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor // final이 붙은 필드를 포함하는 생성자를 자동으로 생성
 public class ArticleController {
-    private final ArticleRepository articleRepository;
+    private final ArticleService articleService;
 
     @GetMapping("/article/list")
     public String list(Model model) {       //  Model 객체에 값을 담아두면 템플릿에서 사용 가능
-        List<Article> articleList = this.articleRepository.findAll();
+        List<Article> articleList = this.articleService.getList();
 
         model.addAttribute("articleList", articleList);
 
