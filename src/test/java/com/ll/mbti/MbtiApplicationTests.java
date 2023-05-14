@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,9 +18,12 @@ class MbtiApplicationTests {
 	@Autowired		//	테스트 코드는 생성자를 통한 객체주입이 안되기 때문에 @Autowired를 사용
 	private ArticleRepository articleRepository;
 
+	@Autowired
+	private CommentRepository commentRepository;
+
 	@Test
-	@DisplayName("게시글 등록")
-	void saveArticle() {
+	@DisplayName("게시글 생성")
+	void createArticle() {
 		Article article1 = new Article();
 		article1.setTitle("당신의 MBTI는 뭔가요?");
 		article1.setContent("각자의 MBTI를 알려주세요.");
@@ -79,6 +83,32 @@ class MbtiApplicationTests {
 		assertEquals(1, this.articleRepository.count());
 	}
 
+	@Test
+	@DisplayName("댓글 생성")
+	void createComment() {
+		Optional<Article> optionalArticle = this.articleRepository.findById(2);
+		assertTrue(optionalArticle.isPresent());
+		Article article = optionalArticle.get();
 
+		Comment comment = new Comment();
+		comment.setContent("저는 E인데 내향적이에요.");
+		comment.setArticle(article);  // 어떤 글의 댓글인지 정의
+		comment.setCreateDate(LocalDateTime.now());
+		this.commentRepository.save(comment);
+	}
+
+	@Test
+	@Transactional
+	@DisplayName("게시글에 연결 된 댓글 찾기")
+	void articleConnectedComment() {
+		Optional<Article> optionalArticle = this.articleRepository.findById(2);
+		assertTrue(optionalArticle.isPresent());
+		Article article = optionalArticle.get();
+
+		List<Comment> commentList = article.getComments();
+
+		assertEquals(1, commentList.size());
+		assertEquals("저는 E인데 내향적이에요.", commentList.get(0).getContent());
+	}
 
 }
