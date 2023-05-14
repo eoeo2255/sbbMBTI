@@ -19,6 +19,6 @@ public class Article {
     @Column(columnDefinition = "TEXT")      //  columnDefinition = "TEXT" 속성으로 해당 컬럼의  글자수를 제한할 수 없다.
     private String content;
     private LocalDateTime createDate;
-    @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
     private List<Comment> comments;
 }
